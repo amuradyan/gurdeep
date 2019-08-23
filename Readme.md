@@ -1,5 +1,5 @@
 # Gurdeep 
-![alt text](https://github.com/amuradyan/gurdeep/blob/master/gurdeep.jpg)
+![](https://github.com/amuradyan/gurdeep/blob/master/gurdeep.png)
 
 
 Gurdeep is a technical term dictionary slack bot.
