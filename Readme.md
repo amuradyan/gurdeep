@@ -1,6 +1,4 @@
-# Gurdeep 
-![](https://github.com/amuradyan/gurdeep/blob/master/gurdeep.png)
-
+# Gurdeep ![](https://github.com/amuradyan/gurdeep/blob/master/gurdeep.png)
 
 Gurdeep is a technical term dictionary slack bot.
 It is written in Scala and sports a popular Punjabi name, meaning ‘lamp of the teacher’.

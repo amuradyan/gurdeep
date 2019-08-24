@@ -12,7 +12,7 @@ import io.scalac.slack.{BotModules, MessageEventBus}
 object GurdeepRunner extends Shutdownable {
   val system = ActorSystem("GurdeepSystem")
   val eventBus = new MessageEventBus
-  val slackBot = system.actorOf(Props(classOf[SlackBotActor], new ExampleBotsBundle(), eventBus, this, None), "gurdeep")
+  val slackBot = system.actorOf(Props(classOf[SlackBotActor], new GurdeepModules(), eventBus, this, None), "gurdeep")
 
   def main(args: Array[String]) {
     println("Gurdeep started")
@@ -38,7 +38,7 @@ object GurdeepRunner extends Shutdownable {
     system.awaitTermination()
   }
 
-  class ExampleBotsBundle() extends BotModules {
+  class GurdeepModules() extends BotModules {
     override def registerModules(context: ActorContext, websocketClient: ActorRef) = {
       context.actorOf(Props(classOf[CommandsRecognizerBot], eventBus), "commandProcessor")
       context.actorOf(Props(classOf[HelpBot], eventBus), "helpBot")
