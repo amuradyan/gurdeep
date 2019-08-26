@@ -40,7 +40,7 @@ object Databank {
 
   val gurdeepDB = mongoClient.getDatabase(db).withCodecRegistry(codecRegistry)
   val glossary: MongoCollection[Definition] = gurdeepDB.getCollection("glossary")
-  val facts: MongoCollection[Fact] = gurdeepDB.getCollection("fact")
+  val facts: MongoCollection[Fact] = gurdeepDB.getCollection("facts")
 
   private def getTechTermsURL(term: String) = {
     val referenceURL = s"https://techterms.com/definition/${term}"
@@ -69,6 +69,11 @@ object Databank {
         "This incident will be reported and taken care of."
   }
 
-  def randomDefinition = ""
+  def randomDefinition = glossary.aggregate(Seq(sample(1))).results().headOption match {
+    case Some(definition) => definition.asDefinition
+    case None =>
+        "It seems there are no definitions in my databank.\\n" +
+        "This wont go unnoticed."
+  }
 }
 

@@ -18,6 +18,8 @@ All commands start with a "$" sign
 To see the definition of port, we should do the following:
    
     > $def port
+    
+If the term is omitted, a random Gurdeep responds with a random definition 
 
 ### hitme
 
