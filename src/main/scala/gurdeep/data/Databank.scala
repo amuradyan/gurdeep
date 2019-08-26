@@ -49,12 +49,15 @@ object Databank {
     if (response.code == 200) referenceURL else ""
   }
 
+  private def getTechTermReference (term: String)= {
+    val techTermsURL = getTechTermsURL(term)
+    if(techTermsURL.nonEmpty) s"See more at: $techTermsURL" else ""
+  }
+
   def define(term: String) = {
     glossary.find(equal("term", term)).results().headOption match {
       case Some(definition) => {
-        val techTermsURL = getTechTermsURL(term)
-        val techTermsReference = if(techTermsURL.nonEmpty) s"See more at: $techTermsURL" else ""
-
+        val techTermsReference = getTechTermReference(term)
         s"${definition.asDefinition}\\n${techTermsReference}"
       }
       case None =>
@@ -70,10 +73,12 @@ object Databank {
   }
 
   def randomDefinition = glossary.aggregate(Seq(sample(1))).results().headOption match {
-    case Some(definition) => definition.asDefinition
+    case Some(definition) => {
+      val techTermsReference = getTechTermReference(definition.term)
+      s"${definition.asDefinition}\\n${techTermsReference}"
+    }
     case None =>
         "It seems there are no definitions in my databank.\\n" +
         "This wont go unnoticed."
   }
 }
-
