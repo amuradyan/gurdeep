@@ -28,7 +28,8 @@ gradlew*
 
 # IJ IDEA specific
 .idea/
-project/
 
 # Misc
-.bloop/
+**/.bloop/
+**/target/
+project/project/
