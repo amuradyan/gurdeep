@@ -1,7 +1,7 @@
 package gurdeep
 
 import akka.actor.{ActorContext, ActorRef, ActorSystem, Props}
-import gurdeep.bots.{DefineBot, HitmeBot, PingPongBot}
+import gurdeep.bots.{AwemeBot, DefineBot, ListBot, PingPongBot, TagBot}
 import io.scalac.slack.api.Start
 import io.scalac.slack.bots.system.{CommandsRecognizerBot, HelpBot}
 import io.scalac.slack.common.Shutdownable
@@ -43,8 +43,11 @@ object GurdeepRunner extends Shutdownable {
       context.actorOf(Props(classOf[CommandsRecognizerBot], eventBus), "commandProcessor")
       context.actorOf(Props(classOf[HelpBot], eventBus), "helpBot")
       context.actorOf(Props(classOf[DefineBot], eventBus), "defineBot")
-      context.actorOf(Props(classOf[HitmeBot], eventBus), "hitmeBot")
+      context.actorOf(Props(classOf[AwemeBot], eventBus), "awemeBot")
+      context.actorOf(Props(classOf[ListBot], eventBus), "listBot")
+      context.actorOf(Props(classOf[TagBot], eventBus), "tagBot")
       context.actorOf(Props(classOf[PingPongBot]), "pingpongBot")
     }
   }
+
 }

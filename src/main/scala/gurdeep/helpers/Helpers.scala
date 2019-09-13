@@ -18,12 +18,12 @@ object Helpers {
     override val converter: (Document) => String = (doc) => doc.toJson
   }
 
-  implicit class UserObservable[C](val observable: Observable[Definition]) extends ImplicitObservable[Definition] {
+  implicit class DefinitionObservable[C](val observable: Observable[Definition]) extends ImplicitObservable[Definition] {
     val gson = new Gson();
     override val converter: (Definition) => String = (doc) => gson.toJson(doc)
   }
 
-  implicit class TokenObservable[C](val observable: Observable[Fact]) extends ImplicitObservable[Fact] {
+  implicit class FactObservable[C](val observable: Observable[Fact]) extends ImplicitObservable[Fact] {
     val gson = new Gson();
     override val converter: (Fact) => String = (doc) => gson.toJson(doc)
   }

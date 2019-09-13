@@ -5,8 +5,8 @@ import io.scalac.slack.MessageEventBus
 import io.scalac.slack.bots.AbstractBot
 import io.scalac.slack.common.{Command, OutboundMessage}
 
-case class Definition(term: String, definition: String) {
-  def asDefinition = s"*${term.capitalize}*: ${definition.capitalize}"
+case class Definition(term: String, definition: String, tags: List[String]) {
+  def asDefinition = s"*${term.capitalize}*: ${definition.capitalize}\\n${tags.mkString(" ")}"
 }
 
 class DefineBot(override val bus: MessageEventBus) extends AbstractBot {

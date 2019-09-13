@@ -1,6 +1,30 @@
 [
-  {"term": "protocol", "definition": "an official procedure or system of rules governing affairs" },
-  {"term": "ip address","definition": "a numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication" },
-  {"term": "digital signal","definition": "data, represented as a sequence of discrete values" },
-  {"term": "port","definition": "a logical construct that identifies a specific process or a type of network service" }
+  {
+    "term": "protocol",
+    "definition": "an official procedure or system of rules governing affairs",
+    "tags": [
+      "network", "internet", "software"
+    ]
+  },
+  {
+    "term": "ip address",
+    "definition": "a numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication",
+    "tags": [
+      "network", "internet", "software"
+    ]
+  },
+  {
+    "term": "digital signal",
+    "definition": "data, represented as a sequence of discrete values",
+    "tags": [
+      "computer", "data representation"
+    ]
+  },
+  {
+    "term": "port",
+    "definition": "a logical construct that identifies a specific process or a type of network service",
+    "tags": [
+      "network", "internet", "software", "hardware"
+    ]
+  }
 ]

@@ -3,8 +3,9 @@ package gurdeep.data
 import com.mongodb.ConnectionString
 import scalaj.http._
 import com.typesafe.config.ConfigFactory
-import gurdeep.bots.{Definition, Fact}
+import gurdeep.bots.{Definition, Fact, Section, Tag}
 import gurdeep.helpers.Helpers._
+import org.mongodb.scala.bson.conversions
 import org.mongodb.scala.model.Aggregates._
 import org.mongodb.scala.model.Filters._
 import org.mongodb.scala.{MongoClient, MongoClientSettings, MongoCollection, MongoCredential}
@@ -33,7 +34,10 @@ object Databank {
   val codecRegistry = fromRegistries(
     fromProviders(
       classOf[Definition],
-      classOf[Fact]),
+      classOf[Fact],
+      classOf[Section],
+      classOf[Tag]
+    ),
     DEFAULT_CODEC_REGISTRY)
 
   val mongoClient = MongoClient(clientSettingsBuilder.build())
@@ -41,6 +45,8 @@ object Databank {
   val gurdeepDB = mongoClient.getDatabase(db).withCodecRegistry(codecRegistry)
   val glossary: MongoCollection[Definition] = gurdeepDB.getCollection("glossary")
   val facts: MongoCollection[Fact] = gurdeepDB.getCollection("facts")
+  val sections: MongoCollection[Section] = gurdeepDB.getCollection("sections")
+  val tags: MongoCollection[Tag] = gurdeepDB.getCollection("tags")
 
   private def getTechTermsURL(term: String) = {
     val referenceURL = s"https://techterms.com/definition/${term}"
@@ -80,5 +86,20 @@ object Databank {
     case None =>
         "It seems there are no definitions in my databank.\\n" +
         "This wont go unnoticed."
+  }
+
+  def list(section: Option[String]) = {
+    section match {
+      case None => sections.find.results()
+      case Some(section) => sections.find(regex("name", s"^$section", "i")).results()
+    }
+  }
+
+  def getAllTags = tags.find.results
+
+  def listTags(tags: List[String]) = {
+    val filters = or(tags.map(equal("tags", _)): _*)
+    val terms = glossary.find(filters).results
+    terms.map(_.term.capitalize)
   }
 }
