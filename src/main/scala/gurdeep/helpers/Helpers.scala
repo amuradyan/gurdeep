@@ -3,7 +3,7 @@ package gurdeep.helpers
 import java.util.concurrent.TimeUnit
 
 import com.google.gson.Gson
-import gurdeep.bots.{Definition, Fact}
+import gurdeep.bots.{Definition, Fact, Tags, Term}
 import org.mongodb.scala._
 
 import scala.concurrent.Await
@@ -21,6 +21,16 @@ object Helpers {
   implicit class DefinitionObservable[C](val observable: Observable[Definition]) extends ImplicitObservable[Definition] {
     val gson = new Gson();
     override val converter: (Definition) => String = (doc) => gson.toJson(doc)
+  }
+
+  implicit class TermObservable[C](val observable: Observable[Term]) extends ImplicitObservable[Term] {
+    val gson = new Gson();
+    override val converter: (Term) => String = (doc) => gson.toJson(doc)
+  }
+
+  implicit class TagsObservable[C](val observable: Observable[Tags]) extends ImplicitObservable[Tags] {
+    val gson = new Gson();
+    override val converter: (Tags) => String = (doc) => gson.toJson(doc)
   }
 
   implicit class FactObservable[C](val observable: Observable[Fact]) extends ImplicitObservable[Fact] {

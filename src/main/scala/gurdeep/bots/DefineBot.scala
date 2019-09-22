@@ -5,6 +5,8 @@ import io.scalac.slack.MessageEventBus
 import io.scalac.slack.bots.AbstractBot
 import io.scalac.slack.common.{Command, OutboundMessage}
 
+case class Term(term: String)
+
 case class Definition(term: String, definition: String, tags: List[String]) {
   def asDefinition = s"*${term.capitalize}*: ${definition.capitalize}\\n${tags.mkString(" ")}"
 }

@@ -1,14 +1,14 @@
 package gurdeep.data
 
 import com.mongodb.ConnectionString
-import scalaj.http._
 import com.typesafe.config.ConfigFactory
-import gurdeep.bots.{Definition, Fact, Section, Tag}
+import gurdeep.bots._
 import gurdeep.helpers.Helpers._
-import org.mongodb.scala.bson.conversions
 import org.mongodb.scala.model.Aggregates._
 import org.mongodb.scala.model.Filters._
+import org.mongodb.scala.model.Projections._
 import org.mongodb.scala.{MongoClient, MongoClientSettings, MongoCollection, MongoCredential}
+import scalaj.http._
 
 object Databank {
   import org.bson.codecs.configuration.CodecRegistries.{fromProviders, fromRegistries}
@@ -36,7 +36,8 @@ object Databank {
       classOf[Definition],
       classOf[Fact],
       classOf[Section],
-      classOf[Tag]
+      classOf[Term],
+      classOf[Tags]
     ),
     DEFAULT_CODEC_REGISTRY)
 
@@ -45,8 +46,6 @@ object Databank {
   val gurdeepDB = mongoClient.getDatabase(db).withCodecRegistry(codecRegistry)
   val glossary: MongoCollection[Definition] = gurdeepDB.getCollection("glossary")
   val facts: MongoCollection[Fact] = gurdeepDB.getCollection("facts")
-  val sections: MongoCollection[Section] = gurdeepDB.getCollection("sections")
-  val tags: MongoCollection[Tag] = gurdeepDB.getCollection("tags")
 
   private def getTechTermsURL(term: String) = {
     val referenceURL = s"https://techterms.com/definition/${term}"
@@ -89,13 +88,27 @@ object Databank {
   }
 
   def list(section: Option[String]) = {
+    val terms = glossary.withDocumentClass[Term]()
+    val fieldsOfInterest = fields(
+      excludeId(),
+      include("term")
+    )
+
     section match {
-      case None => sections.find.results()
-      case Some(section) => sections.find(regex("name", s"^$section", "i")).results()
+      case None => terms.find().projection(fieldsOfInterest ).results()
+      case Some(section) => terms.find(regex("term", s"^$section", "i")).projection(include("term")).results()
     }
   }
 
-  def getAllTags = tags.find.results
+  def getAllTags = {
+    val tags = glossary.withDocumentClass[Tags]()
+    val fieldsOfInterest = fields(
+      excludeId(),
+      include("tags")
+    )
+
+    tags.find.projection(fieldsOfInterest).results.foldLeft(Set[String]()){ (acc, t) => acc ++ t.tags }
+  }
 
   def listTags(tags: List[String]) = {
     val filters = or(tags.map(equal("tags", _)): _*)

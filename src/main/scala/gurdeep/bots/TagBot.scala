@@ -5,7 +5,7 @@ import io.scalac.slack.MessageEventBus
 import io.scalac.slack.bots.AbstractBot
 import io.scalac.slack.common.{Command, OutboundMessage}
 
-case class Tag(tag: String)
+case class Tags(tags: List[String])
 
 class TagBot(override val bus: MessageEventBus) extends AbstractBot {
   override def help(channel: String): OutboundMessage =
