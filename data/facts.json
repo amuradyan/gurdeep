@@ -1,7 +1,30 @@
-[
-  {"fact": "A denial-of-service attack floods systems, servers, or networks with traffic to exhaust resources and bandwidth."},
-  {"fact": "Network is a structure of interconnected objects, called nodes. E.g. in social networks people are nodes, in road networks, crossroads could be thought of as nodes"},
-  {"fact": "IPv6 uses a 128-bit address, theoretically allowing 2^128, or approximately 3.4×10^38 addresses"},
-  {"fact": "Using the loopback interface bypasses any local network interface hardware."},
-  {"fact": "HTTP functions as a request–response protocol in the client–server computing model. It is the foundation of any data exchange on the Web."}
-]
+  {
+    "fact": "A denial-of-service attack floods systems, servers, or networks with traffic to exhaust resources and bandwidth.",
+    "tags": [
+      "computer", "signal", "cybersecurity"
+    ]
+  }
+  {
+    "fact": "Network is a structure of interconnected objects, called nodes. E.g. in social networks people are nodes, in road networks, crossroads could be thought of as nodes",
+    "tags": [
+      "computer", "signal", "internet"
+    ]
+  }
+  {
+    "fact": "IPv6 uses a 128-bit address, theoretically allowing 2^128, or approximately 3.4×10^38 addresses",
+    "tags": [
+      "computer", "signal", "internet", "ip"
+    ]
+  }
+  {
+    "fact": "Using the loopback interface bypasses any local network interface hardware.",
+    "tags": [
+      "computer", "signal", "internet", "network" 
+    ]
+  }
+  {
+    "fact": "HTTP functions as a request–response protocol in the client–server computing model. It is the foundation of any data exchange on the Web.",
+    "tags": [
+      "computer", "signal", "web", "http", "protocol"
+    ]
+  }
