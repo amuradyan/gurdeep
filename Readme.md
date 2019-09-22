@@ -1,4 +1,4 @@
-# Gurdeep ![](https://github.com/amuradyan/gurdeep/blob/master/gurdeep.png)
+# Gurdeep ![ ](https://github.com/amuradyan/gurdeep/blob/master/gurdeep.png)
 
 Gurdeep is a slack bot that retrieves technical term definitions.  
 Gurdeep stores terms in a dictionary. Each term is defined by it's name and has tags
@@ -17,11 +17,11 @@ All commands start with a "$" sign.
 ***def*** responds with the definition of the term.
 
     > $def <term containing spaces>
-    
+
 To see the definition of _port_, we should do the following:
-   
+
     > $def port
-    
+
 If the term is omitted, Gurdeep responds with a random definition.
 
 ### aweme
@@ -37,14 +37,14 @@ It is case insensitive.
 
     > $list <prefix>
 
-Given the words _Port_, _Internet Protocol (IP)_, _HDD_, _adapter_ and _3D Printer_, 
+Given the words _Port_, _Internet Protocol (IP)_, _HDD_, _adapter_ and _3D Printer_,
 sending _list_ will result in the following output:
 
     > $list
     < 3 A H I P
 
 It also allows for listing by prefix in which case it returns the interactive search result.  
-Search by _int_ prefix, given the words _Port_, _Internet Protocol (IP)_, _Integer_, 
+Search by _int_ prefix, given the words _Port_, _Internet Protocol (IP)_, _Integer_,s
 _Internationalization (I18N)_ and _3D Printer_ would output the following:
 
     > $ list int
@@ -52,7 +52,7 @@ _Internationalization (I18N)_ and _3D Printer_ would output the following:
 
 A click on a term will pull it's definition.
 
-### tags 
+### tags
 
 ***tags*** responds with the interactive list of all available tags in the dictionary.
 All arguments to tag will be ignored.
@@ -63,8 +63,8 @@ All arguments to tag will be ignored.
 It allows for browsing using multiple tags and is case insensitive.
 
     > $tag <tag1> <tag2> ...
-    
-Given terms _Port (tags: *Internet*, *Network*, *Hardware*, *Software*)_ and 
+
+Given terms _Port (tags: *Internet*, *Network*, *Hardware*, *Software*)_ and
 _Linux (tags: *Kernel*, *OS*, *Software*, *Operating System*)_ it behaves as is
 described below:
 
